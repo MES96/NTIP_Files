@@ -1,3 +1,7 @@
+% PREPROCESS PART 2
+% To be run after ICA components have been manually selected for rejection
+% via EEGLAB or SASICA, but not yet removed from the data.
+
 clear all
 % path to ICA processed data
 filepath = 'C:\Data\Catastrophising study\Preprocessed';
@@ -50,6 +54,8 @@ for f = files_ana
 
     % Also save each condition ('stimtype') in a separate EEG structure (EEGLAB
     % format), all inside one big structure called ALLEEG
+    % This can be used for checking data quality later (use "Plot_ALLEEG.m", but is not used for
+    % any further processing.
     if ALLEEG_save
         EEGall=EEG;
         if ALLEEG_save==1
