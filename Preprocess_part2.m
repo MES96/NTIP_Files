@@ -4,10 +4,10 @@
 
 clear all
 % path to ICA processed data
-filepath = 'C:\Data\Catastrophising study\Preprocessed';
+filepath = 'Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Preprocessed';
 cd(filepath);
 % file suffix common to all files needing furter processing
-files = dir('*_orig_ICA.set');
+files = dir('*_ICA.set');
 % path to chanlocs file
 load('C:\Data\Catastrophising study\Orig\chanlocs.mat');
 
