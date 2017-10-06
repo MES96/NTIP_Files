@@ -22,7 +22,7 @@ files = dir('NTIP_0000_Tim_Audio_*.set');
 cd(anapath);
 
 % SET SOME OPTIONS
-timebin = [-0.5 0.5]; % for epoching
+timebin = [-0.2 0.3]; % for epoching
            %more epochs need adding for different markers?
 filterset = [0.5 100]; % FILTER SETTINGS - INCLUSIVE
   %ISI needed?
