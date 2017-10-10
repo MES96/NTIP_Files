@@ -37,7 +37,8 @@ for f = files_ana
     
     % detrend, remove baseline and re-reference to the common average
     for i = 1:EEG.trials, EEG.data(:,:,i) = detrend(EEG.data(:,:,i)')'; end;
-    %EEG = pop_rmbase( EEG, [basebin(1)*1000 basebin(2)*1000]);
+    %EEG = pop_rmbase( EEG, [basebin(1)*1000 basebin(2)*1000]); %baseline
+    %correction on resting state data wouldn't work
     EEG = pop_reref( EEG, []);
     
     % perform final (poast-ICA) rejection of bad channels/epochs

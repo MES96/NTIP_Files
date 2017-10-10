@@ -33,7 +33,7 @@ for f = files_ana
     EEG = pop_subcomp( EEG, [], 0); 
     
     % interpolate any missing channels using chanlocs
-    %EEG = eeg_interp(EEG,eeg_mergelocs(chanlocs),'spherical');
+  %  EEG = eeg_interp(EEG,eeg_mergelocs(chanlocs),'spherical');
     
     % detrend, remove baseline and re-reference to the common average
     for i = 1:EEG.trials, EEG.data(:,:,i) = detrend(EEG.data(:,:,i)')'; end;
