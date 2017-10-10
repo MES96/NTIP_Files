@@ -7,16 +7,16 @@ clear all
 filepath = 'Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Preprocessed';
 cd(filepath);
 % file suffix common to all files needing furter processing
-files = dir('*_ICA.set');
+files = dir('*GUI_ICA.set');
 % path to chanlocs file
-load('C:\Data\Catastrophising study\Orig\chanlocs.mat');
+load('Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\chanlocs.mat');
 
 ALLEEG_save = 1; % 1= save multiple ERPs from one file; 2 = save one ERP from multiple files
 
 % baseline range
-basebin = [-5.5 -5];
+basebin = [-0.2 -0.1];
 % stimulus markers to include in analysis
-stimtypes = {'c0','c1','c2','c3','c4','c5','c6','c7','c8'};
+stimtypes = {'S  1','S  2','S  3','S  4','S  5','S  6','S  7','S  8'};
 
 % range of files within 'files' to include in this run
 files_ana = 1:length(files);
@@ -33,7 +33,7 @@ for f = files_ana
     EEG = pop_subcomp( EEG, [], 0); 
     
     % interpolate any missing channels using chanlocs
-    EEG = eeg_interp(EEG,eeg_mergelocs(chanlocs),'spherical');
+    %EEG = eeg_interp(EEG,eeg_mergelocs(chanlocs),'spherical');
     
     % detrend, remove baseline and re-reference to the common average
     for i = 1:EEG.trials, EEG.data(:,:,i) = detrend(EEG.data(:,:,i)')'; end;

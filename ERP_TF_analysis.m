@@ -10,12 +10,12 @@ close all
 dbstop if error
 %% PATHS AND DATA
 % path to cleaned EEG data
-filepath = 'C:\Data\Catastrophising study\Preprocessed';
+filepath = 'Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Preprocessed';
 cd(filepath);
 % generic file suffix
 filesuff = ('_orig_cleaned.set');
 % chanlocs file path
-load('C:\Data\Catastrophising study\Orig\chanlocs.mat');
+load('Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Set\chanlocs.mat');
 
 % load .xlsx file containing columns named 'Participant_ID', 'Group', and
 % any covariates of interest
@@ -30,8 +30,8 @@ select = 'Freq'; TFmethod = '-FT'; % Coherence (fieldtrip)
 %select = 'ERP'; TFmethod = ''; % if ERP, leave TF blank
 
 
-timebin = [-5.5 2]; % time window
-basebin = [-5.5 -5]; % baseline window
+timebin = [-0.2 0.3]; % time window
+basebin = [-0.2 -0.1]; % baseline window
 
 % select frequency range and resolution (if freq analysis)
 freqsrange = [4:2:20]; % example of keeping freq resolution high (2Hz) for TF analysis

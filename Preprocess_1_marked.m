@@ -17,12 +17,12 @@ design_path = 'Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Raw'; % contains some r
 
 % FIND THE DATA FILES
 cd(origpath);
-files = dir('NTIP_0000_Tim_Eyes*.set');
+files = dir('NTIP_TimAudio*.set');
 
 cd(anapath);
 
 % SET SOME OPTIONS
-timebin = [0 2]; % for epoching
+timebin = [-0.2 0.3]; % for epoching       
 filterset = [0.5 100]; % FILTER SETTINGS - INCLUSIVE
 notch_on = 3;
 addpath(genpath('Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Supplementary data'));
@@ -39,13 +39,16 @@ for f = files_ana
     % LOAD DATA
     EEG = pop_loadset('filename',orig_file,'filepath',origpath);
     
-    % EXCLUDE M1, VEOG1 and VEOG2
-    chanexcl = [3 31 39];   
-    EEG = pop_select(EEG,'nochannel',chanexcl);
-    
     %ADD CHANNEL LOCATIONS 
     EEG=pop_chanedit(EEG, 'lookup','C:\\Work\\eeglab14_1_1b\\plugins\\dipfit2.3\\standard_BESA\\standard-10-5-cap385.elp');
-   
+    
+    % EXCLUDE FC2 BEFORE INTERPOLATION
+    chanexcl = [22];   
+    EEG = pop_select(EEG,'nochannel',chanexcl);
+    
+    %INTERPOLATE 
+    EEG= eeg_interp(EEG, chanexcl, 'spherical');
+      
     % APPLY NOTCH FILTER: 3 OPTIONS
     if notch_on==1 
         EEG = pop_eegfiltnew(EEG,45,55,[],1); 
@@ -86,21 +89,8 @@ for f = files_ana
    
     
     % EPOCH
-    %add 2sec epochs by adding markers every second and epochs after that
-    
-    %add the marker ('M') 
-    Sr = EEG.srate; % sampling rate of data
-    Ndp = Sr*(timebin(2)-timebin(1));% number of data points per epoch
-    Tdp = size(EEG.data,2);% total number of data points in file
-    Mep = floor(Tdp/Ndp);% max possible number of epochs
-    for i = 1:Mep;
-        EEG.event(1,i).type = 'M';
-        EEG.event(1,i).latency = (i-1)*Ndp+1;
-        EEG.event(1,i).urevent = 'M';
-    end
-    
-    %create 2sec epochs
-    EEG = pop_epoch( EEG, {  'M'  }, timebin, 'newname', [C{1} '_' C{2} '_epochs'],'epochinfo', 'yes');
+    %create epochs 
+    EEG = pop_epoch( EEG, {'S  1' 'S  2' 'S  3' 'S  4' 'S  5' 'S  6' 'S  7' 'S  8'}, timebin, 'newname', [C{1} '_' C{2} '_epochs'],'epochinfo', 'yes');
   
     % LINEAR DETREND
     %for i = 1:EEG.trials, EEG.data(:,:,i) = detrend(EEG.data(:,:,i)')'; end;
