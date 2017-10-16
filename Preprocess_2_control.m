@@ -9,14 +9,14 @@ cd(filepath);
 % file suffix common to all files needing furter processing
 files = dir('NTIP_TimEyesClosed_ICA.set');
 % path to chanlocs file
-load('Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\chanlocs.mat');
+%load('Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\chanlocs.mat');
 
 ALLEEG_save = 1; % 1= save multiple ERPs from one file; 2 = save one ERP from multiple files
 
 % baseline range
 basebin = [-0.2 -0.1];
 % stimulus markers to include in analysis
-stimtypes = {'S  1','S  2','S  3','S  4','S  5','S  6','S  7','S  8'};
+stimtypes = {'S  1','S  2','S  3','S  4','S  5','S  6','S  7','S  8', 'S  9'};
 
 % range of files within 'files' to include in this run
 files_ana = 1:length(files);

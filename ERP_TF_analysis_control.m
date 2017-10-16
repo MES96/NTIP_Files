@@ -10,7 +10,7 @@ close all
 dbstop if error
 %% PATHS AND DATA
 % path to cleaned EEG data
-filepath = 'Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Analysis\Marked';
+filepath = 'Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Analysis\Control';
 cd(filepath);
 % generic file suffix
 filesuff = ('_cleaned.set');
@@ -19,18 +19,18 @@ load('Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\chanlocs.mat');
 
 % load .xlsx file containing columns named 'Participant_ID', 'Group', and
 % any covariates of interest
-pdatfile = 'Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Analysis\Marked\Participant_data_A0M.xlsx';
+pdatfile = 'Y:\Marie Shorrock\NTIP\Pilot_Tim_Auditory\Analysis\Control\Participant_data_A0C.xlsx';
 
 %% SETTINGS
 
 % Here select analysis by selecting one line at a time:
 %select = 'TF'; TFmethod = '-FT'; % or, '-EL' % recommend FT (fieldtrip)
-%select = 'Freq'; TFmethod = '-FT'; % Coherence (fieldtrip)
+select = 'Freq'; TFmethod = '-FT'; % Coherence (fieldtrip)
 %select = 'Coh'; TFmethod = '-FT'; % Coherence (fieldtrip)
-select = 'ERP'; TFmethod = ''; % if ERP, leave TF blank
+%select = 'ERP'; TFmethod = ''; % if ERP, leave TF blank
 
 
-timebin = [-0.2 0.3]; % time window
+timebin = [0 0.5]; % time window
 basebin = [-0.2 -0.1]; % baseline window
 
 % select frequency range and resolution (if freq analysis)
@@ -44,8 +44,8 @@ bootrep = 50;
 ncycles=3;
 
 % stimtypes to include in analysis
-eventtypes = {'S  1','S  2','S  3','S  4','S  5','S  6','S  7','S  8', 'S  9'}; % stim labels
-use_etype = [1 2 3 4 5 6 7 8 9]; % index of labels to include
+eventtypes = {'M'}; % stim labels
+use_etype = [1]; % index of labels to include
 no_cond = length(use_etype);
 
 % save single trial data? (large files!)
@@ -159,7 +159,7 @@ for g = 1:length(subjects)
         
         for st = 1:no_cond
             EEG = pop_selectevent(EEGall,'type',eventtypes{use_etype(st)});
-            EEG = pop_rmbase( EEG, [basebin(1)*1000 basebin(2)*1000]);
+            %EEG = pop_rmbase( EEG, [basebin(1)*1000 basebin(2)*1000]);
             eegdata = [];
             eegdatasing = [];
             inddata = [];
@@ -314,4 +314,3 @@ for g = 1:length(subjects)
 end
 
 save([select TFmethod savenametype '_data.mat'],'-v7.3');
-

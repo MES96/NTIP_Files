@@ -44,9 +44,6 @@ for f = files_ana
     
     % EXCLUDE FC2 BEFORE INTERPOLATION
     chanexcl = [22];   
-    EEG = pop_select(EEG,'nochannel',chanexcl);
-    
-    %INTERPOLATE 
     EEG= eeg_interp(EEG, chanexcl, 'spherical');
    
     % APPLY NOTCH FILTER: 3 OPTIONS

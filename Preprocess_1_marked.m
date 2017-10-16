@@ -44,7 +44,7 @@ for f = files_ana
     
     % EXCLUDE FC2 BEFORE INTERPOLATION
     chanexcl = [22];   
-    EEG = pop_select(EEG,'nochannel',chanexcl);
+    %EEG = pop_select(EEG,'nochannel',chanexcl);
     
     %INTERPOLATE 
     EEG= eeg_interp(EEG, chanexcl, 'spherical');
@@ -90,7 +90,7 @@ for f = files_ana
     
     % EPOCH
     %create epochs 
-    EEG = pop_epoch( EEG, {'S  1' 'S  2' 'S  3' 'S  4' 'S  5' 'S  6' 'S  7' 'S  8'}, timebin, 'newname', [C{1} '_' C{2} '_epochs'],'epochinfo', 'yes');
+    EEG = pop_epoch( EEG, {'S  1' 'S  2' 'S  3' 'S  4' 'S  5' 'S  6' 'S  7' 'S  8' 'S  9'}, timebin, 'newname', [C{1} '_' C{2} '_epochs'],'epochinfo', 'yes');
   
     % LINEAR DETREND
     %for i = 1:EEG.trials, EEG.data(:,:,i) = detrend(EEG.data(:,:,i)')'; end;
