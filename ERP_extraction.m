@@ -13,7 +13,7 @@ cd(filepath);
 cd(anapath);
 
 % Choose the option (1 or 2)
-option = 2;
+option = 1;
 
 if option==1
     %Extract only S1 (standard)
@@ -132,6 +132,6 @@ for f = files_ana
     C = strsplit(nme,'_');
     EEG = pop_loadset('filename',files(f).name,'filepath',filepath);    
     EEG = eeg_checkset( EEG );    
-    figure; pop_plottopo(EEG, [1:62] , 'files', 0, 'ydir',1);
+    figure; pop_plottopo(EEG, [1:62] , 'files', 0, 'ydir', 1, 'limits', [-200 299 -2.25 2.25]);
     eeglab redraw; 
 end     
