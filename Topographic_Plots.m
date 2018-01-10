@@ -13,5 +13,5 @@ for f = files_ana
     C = strsplit(nme,'_');
     EEG = pop_loadset('filename',files(f).name,'filepath',filepath); 
     EEG = eeg_checkset( EEG );
-    figure;pop_topoplot(EEG,1, 299,'',[1 1] ,0,'electrodes','on', 'maplimits', [-0.7, 0.7]);
+    figure;pop_topoplot(EEG,1, 299,'',[1 1] ,0,'electrodes','on', 'maplimits', [-10, 10]);
 end
